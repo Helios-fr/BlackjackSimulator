@@ -1,5 +1,7 @@
 from utils import Card, Deck, Player
 from simple_bot import Bot
+from random import shuffle
+from advanced_bot import Bot as advanced_bot
 import matplotlib.pyplot as plt
 
 # Initialize game components
@@ -8,6 +10,8 @@ dealer = Player()
 player = Player()
 bot = Bot()
 bot.capital = 1000
+bot1 = advanced_bot()
+
 
 def reset_hands():
     player.clear_hand()
@@ -18,7 +22,7 @@ def simulate_round(bot):
     if len(deck) < 20:
         deck = Deck(1)
     
-    bet = bot.bet(deck)
+    bet = bot.bet(deck.get_deck())
     player.add(deck.draw(2))
     dealer.add(deck.draw(2))
     
@@ -72,9 +76,11 @@ def simulate(bot, rounds_to_simulate):
 
 # Run simulation
 capital_changes, player_wins, dealer_wins, ties = simulate(bot, 1000000)
+capital_changes1, player_wins1, dealer_wins1, ties1 = simulate(bot1, 1000000)
 
 # Plot results
-plt.plot(capital_changes)
+plt.plot(capital_changes, label="Simple Bot")
+plt.plot(capital_changes1, label="Advanced Bot")
 plt.show()
 
 # Print results

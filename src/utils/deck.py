@@ -10,6 +10,9 @@ class Deck:
     def shuffle(self) -> None:
         self._random.shuffle(self.cards)
 
+    def get_deck(self) -> list[Card]:
+        return self.cards
+
     def draw(self, n: int = 1) -> list[Card]:
         if n > len(self.cards): raise ValueError("Not enough cards to draw")
         return [self.cards.pop() for _ in range(n)]
