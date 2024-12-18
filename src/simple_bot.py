@@ -2,8 +2,7 @@ class Bot:
     def __init__(self):
         self.capital = 1000
 
-    def turn(self, player):
-        print(player.get_hand_value())
+    def turn(self, player, dealer_card):
         if player.get_hand_value() < 16:
             return "Hit"
         else:
